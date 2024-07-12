@@ -3,12 +3,7 @@ package org.mifos.connector.common.exception.mapper;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.mifos.connector.common.channel.dto.PhErrorDTO;
 import org.mifos.connector.common.exception.PaymentHubError;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.mifos.connector.common.exception.ValidationException;
 
 /**
  * Default implementation of mapper. This class can be used in ams or payment schema connector for creating there
@@ -50,11 +45,6 @@ public abstract class ErrorMapper implements Mapper {
         PaymentHubError filterResult = errorMap.values().stream().filter(internalErrorCode::equals).findFirst()
                 .orElseThrow(() -> new RuntimeException("Can not get external error code for internal error code: " + internalErrorCode));
         return filterResult.getErrorCode();
-    }
-
-    @ExceptionHandler(ValidationException.class)
-    public ResponseEntity<PhErrorDTO> handleValidationException(ValidationException ex) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getPhErrorDTO());
     }
 
 }
