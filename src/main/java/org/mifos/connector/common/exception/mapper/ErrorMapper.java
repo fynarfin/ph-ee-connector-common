@@ -2,7 +2,6 @@ package org.mifos.connector.common.exception.mapper;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.mifos.connector.common.exception.PaymentHubError;
 
 /**
@@ -46,5 +45,4 @@ public abstract class ErrorMapper implements Mapper {
                 .orElseThrow(() -> new RuntimeException("Can not get external error code for internal error code: " + internalErrorCode));
         return filterResult.getErrorCode();
     }
-
 }
